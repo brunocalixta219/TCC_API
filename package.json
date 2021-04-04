@@ -16,7 +16,7 @@
     },
     "scripts": {
         "dev": "nodemon",
-        "start": "node"
+        "start": "node ./src/app.js"
     },
     "devDependencies": {
         "nodemon": "^2.0.4"
