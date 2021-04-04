@@ -8,9 +8,10 @@ const ProfileSchema = new mongoose.Schema({
     cpf: {
         type: String,
         required: true,
+        unique: true,
     },
-    age: {
-        type: Number,
+    birthDate: {
+        type: Date,
         required: true,
     },
     gender: {

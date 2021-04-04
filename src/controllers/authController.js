@@ -4,12 +4,12 @@ const authConfig = require('../config/auth');
 const User = require('../models/User');
 const Role = require('../models/Role');
 const Permission = require('../models/Permission');
-const TerapistPatient = require('../models/TerapistPatient');
+const { ObjectId } = require('mongoose').Types;
 
 exports.signIn = async (req, res) => {
     let { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+password');
 
     if (!user)
         return res.status(400).send({ message: 'E-mail ou senha incorretos!' });
@@ -23,7 +23,9 @@ exports.signIn = async (req, res) => {
 
         return res.status(200).send({
             message: 'Login realizado com sucesso!',
+            userId: user.id,
             token: generateToken({ id: user.id }),
+            role: user.role,
             permissions: user.permissions,
         });
     }
@@ -37,13 +39,16 @@ exports.signUp = async (req, res) => {
     if (user) return res.status(400).send({ message: 'Usuário já existente!' });
     else {
         const hash = await bcrypt.hash(password, 10);
-        const newUser = { email, password: hash, role: roleId };
-        await User.create(newUser);
+        const newUser = { email, password: hash, role: ObjectId(roleId) };
+        const createdUser = await User.create(newUser);
+
+        console.log('newUser Id', createdUser.id);
 
         return res.status(200).send({
             message: 'Usuário cadastrado com sucesso!',
-            token: generateToken({ id: newUser.id }),
-            permissions: newUser.permissions,
+            token: generateToken({ id: createdUser.id }),
+            userId: createdUser.id,
+            permissions: createdUser.permissions,
         });
     }
 };
@@ -78,19 +83,6 @@ exports.saveRole = async (req, res) => {
 
     await Role.update({ name }, role, { upsert: true });
     return res.send({ message: 'Perfil cadastrado com sucesso!' });
-};
-
-exports.associatePatient = async (req, res) => {
-    const { terapistId, patientId } = req.body;
-
-    // TODO: validar se todos os ids foram informados
-    // TODO: validar se existem usuários com os IDs informados
-    // TODO: validar se terapistId é o ID de um terapeuta
-    // TODO: validar se patientId é o ID de um paciente
-    // TODO: criar um TerapistController e mover esse método pra lá
-
-    await TerapistPatient.create({ terapist: terapistId, patient: patientId });
-    return res.send({ message: 'Cadastrado com sucesso!' });
 };
 
 function generateToken(params = {}) {

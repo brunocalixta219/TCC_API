@@ -21,7 +21,7 @@ exports.insert = async (req, res) => {
     const {
         name,
         cpf,
-        age,
+        birthDate,
         gender,
         telephone,
         cellphone,
@@ -31,10 +31,11 @@ exports.insert = async (req, res) => {
         userId,
     } = req.body;
 
+    console.log(req.body);
     const profile = await Profile({
         name,
         cpf,
-        age,
+        birthDate,
         gender,
         telephone,
         cellphone,
@@ -45,7 +46,7 @@ exports.insert = async (req, res) => {
 
     await profile.save();
 
-    const user = await User.findById(userId);
+    const user = await User.findById(ObjectId(userId));
 
     user.profile = profile;
     await user.save();
@@ -113,12 +114,12 @@ exports.delete = async (req, res) => {
             const profileId = user.profile;
             await Profile.findOneAndDelete({ _id: ObjectId(profileId) });
             await User.findOneAndDelete({ _id: ObjectId(id) });
-            console.log('Perfil removido com sucesso');
+            console.log('Usuário removido com sucesso');
         } else {
-            console.error('Perfil não encontrado');
+            console.error('Usuário não encontrado');
         }
     } else {
-        console.error('Id do perfil inválido');
+        console.error('Id do usuário inválido');
     }
 
     res.send('OK');

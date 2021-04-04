@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 mongoose.connect(
     'mongodb+srv://sa:sa%4012345678@neuronuvem.4pp5a.mongodb.net/neuroproteses?retryWrites=true&w=majority',
-    { useNewUrlParser: true, useUnifiedTopology: true }
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 );
 
 const { connection } = mongoose;
