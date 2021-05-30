@@ -5,7 +5,7 @@ const router = require('./routers');
 const mongoose = require('mongoose');
 
 mongoose.connect(
-    'mongodb+srv://sa:sa%4012345678@neuronuvem.4pp5a.mongodb.net/neuroproteses?retryWrites=true&w=majority',
+    'mongodb+srv://tcc:lGwai71c1nYOChJA@neuronuvem.4pp5a.mongodb.net/HWatch?retryWrites=true&w=majority',
     { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 );
 
@@ -28,7 +28,7 @@ app.use(function (req, res, next) {
 
 app.use('/', router);
 
-const port = process.env.PORT || '3333';
+const port = process.env.PORT || '5050';
 
 app.listen(port, function () {
     console.log(`App listening on port ${port}`);
