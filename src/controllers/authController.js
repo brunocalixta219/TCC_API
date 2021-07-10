@@ -38,8 +38,6 @@ exports.signUp = async (req, res) => {
         const newUser = { email, password: hash };
         const createdUser = await User.create(newUser);
 
-        console.log('newUser Id', createdUser.id);
-
         return res.status(200).send({
             message: 'Usuário cadastrado com sucesso!',
             token: generateToken({ id: createdUser.id }),

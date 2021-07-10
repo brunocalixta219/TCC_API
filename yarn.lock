@@ -202,10 +202,10 @@ camelcase@^5.3.1:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
-cep-promise@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/cep-promise/-/cep-promise-4.0.2.tgz#a06a02085582d4f7a7e5973b6f13b50da6e502c4"
-  integrity sha512-ndAWW1eBtH2HxI8QZD+WaXBeLnaEKfZlEOmSr5BV1rKETRj3v1ppApOPVRjHaHPDHBo7KYYNpfa2/fSRLAz68A==
+cep-promise@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/cep-promise/-/cep-promise-4.1.1.tgz#21a5b98bab22e77a711ac3644bcf54c7f137076d"
+  integrity sha512-SXxOV4qsY2vt31zuoOQfCz164Y4Aa8WrzCC1TZ74WeO8GeSqlAKEjsa+3sYH0iG6cD0qKhX6JDysF/TixhTIdw==
   dependencies:
     node-fetch "2.6.1"
     unfetch "4.1.0"
