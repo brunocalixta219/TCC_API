@@ -10,10 +10,45 @@ const UserSchema = new mongoose.Schema({
         required: true,
         select: false,
     },
-    profile: {
-        type: mongoose.Types.ObjectId,
-        ref: 'Profile',
+    name: {
+        type: String,
+        required: true,
     },
+    birthDate: {
+        type: Date,
+    },
+    gender: {
+        type: Number,
+    },
+    phone: {
+        type: Number,
+        required: true,
+    },
+    cep: {
+        type: String,
+        required: true,
+    },
+    street: {
+        type: String,
+        required: true,
+    },
+    neighborhood: {
+        type: String,
+        required: true,
+    },
+    city: {
+        type: String,
+        required: true,
+    },
+    state: {
+        type: String,
+        required: true,
+    },
+    number: {
+        type: String,
+        required: true,
+    },
+    complement: String,
 });
 
 module.exports = mongoose.model('User', UserSchema);

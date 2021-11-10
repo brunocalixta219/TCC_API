@@ -92,7 +92,7 @@ exports.insertContact = async (req, res) => {
     });
 };
 
-exports.updateContact = async (req, res) => {
+exports.updateDataContact = async (req, res) => {
     const { name, phone } = req.body;
     const { id } = req.params;
 

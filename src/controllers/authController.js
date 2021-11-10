@@ -28,14 +28,43 @@ exports.signIn = async (req, res) => {
 };
 
 exports.signUp = async (req, res) => {
-    let { email, password } = req.body;
+    let {
+        email,
+        password,
+        name,
+        birthDate,
+        gender,
+        phone,
+        number,
+        complement,
+        street,
+        neighborhood,
+        cep,
+        city,
+        state,
+    } = req.body;
 
     const user = await User.findOne({ email });
 
     if (user) return res.status(400).send({ message: 'Usuário já existente!' });
     else {
         const hash = await bcrypt.hash(password, 10);
-        const newUser = { email, password: hash };
+        const newUser = {
+            email,
+            password: hash,
+            name,
+            birthDate,
+            gender,
+            phone,
+            number,
+            complement,
+            street,
+            neighborhood,
+            cep,
+            city,
+            state,
+        };
+
         const createdUser = await User.create(newUser);
 
         return res.status(200).send({
@@ -46,17 +75,17 @@ exports.signUp = async (req, res) => {
     }
 };
 
-exports.getUsers = async (req, res) => {
-    let userList = {};
+exports.getOne = async (req, res) => {
+    const { id } = req.params;
 
-    const users = await User.find();
+    const user = await User.findOne({ _id: ObjectId(id) });
 
-    users.forEach((user) => {
-        const { id, email } = user;
-        userList[id] = email;
-    });
+    if (!user)
+        return res
+            .status(404)
+            .send({ success: false, message: 'Usuário não encontrado!' });
 
-    return res.send(userList);
+    return res.send({ success: true, payload: user });
 };
 
 function generateToken(params = {}) {
