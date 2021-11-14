@@ -4,6 +4,11 @@ const bodyParser = require('body-parser');
 const router = require('./routers');
 const mongoose = require('mongoose');
 
+// Routes
+const authRouter = require('./authRouter');
+const cepRouter = require('./cepRouter');
+const contactsRouter = require('./contactsRouter');
+
 const server = require('http').createServer();
 const io = require('socket.io')(server);
 
@@ -32,7 +37,19 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/', router);
+app.get('/', (req, res, next) => {
+    res.status(200).json({
+        status: 'success',
+        data: {
+            name: 'name of your app',
+            version: '0.1.0'
+        }
+    });
+});
+
+app.use('/auth', authRouter);
+app.use('/cep', cepRouter);
+app.use('/contacts', contactsRouter);
 
 io.on('connection', socket => {
 
