@@ -342,7 +342,7 @@ io.on('connection', socket => {
 
 const port = process.env.PORT || '5050';
 
-app.listen(port, function () {
+server.listen(port, function () {
     console.log(`App listening on port ${port}`);
 });
 
