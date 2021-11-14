@@ -9,7 +9,7 @@ const authRouter = require('./routers/authRouter');
 const cepRouter = require('./routers/cepRouter');
 const contactsRouter = require('./routers/contactsRouter');
 
-const server = require('http').createServer();
+const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 let telefones, groups = [];
