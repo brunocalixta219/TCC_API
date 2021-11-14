@@ -5,9 +5,9 @@ const router = require('./routers');
 const mongoose = require('mongoose');
 
 // Routes
-const authRouter = require('./authRouter');
-const cepRouter = require('./cepRouter');
-const contactsRouter = require('./contactsRouter');
+const authRouter = require('./routers/authRouter');
+const cepRouter = require('./routers/cepRouter');
+const contactsRouter = require('./routers/contactsRouter');
 
 const server = require('http').createServer();
 const io = require('socket.io')(server);
