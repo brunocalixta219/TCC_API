@@ -28,12 +28,8 @@ connection.once('open', function () {
 
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    );
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept", "Set-Cookie: cross-site-cookie=name; SameSite=None; Secure");
     next();
 });
 
@@ -51,7 +47,11 @@ app.use('/auth', authRouter);
 app.use('/cep', cepRouter);
 app.use('/contacts', contactsRouter);
 
+console.log('Yarn coisa de otario');
+
 io.on('connection', socket => {
+
+    console.log('Peninsula');
 
     app.get('/monitoria/:phone', (req, res) => {
         sql = 'SELECT * FROM infra WHERE numero = ?'
